@@ -6,7 +6,15 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
-  app.enableCors();
+  
+  app.enableCors({
+    origin: [
+      'http://localhost:3000',
+      'http://localhost:3001',
+      'https://pos-system-pizza-frontend-ofzd.vercel.app'
+    ],
+    credentials: true,
+  });
 
   const config = new DocumentBuilder()
     .setTitle('POS System API')
